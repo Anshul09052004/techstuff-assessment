@@ -1,31 +1,38 @@
-export default function Pagination({ next, prev, onPageChange }) {
+export default function Pagination(props) {
+  const { next, prev, onPageChange } = props;
+
+  const baseBtn =
+    "px-5 py-2 rounded-lg font-medium transition";
+
+  const activeStyle =
+    "bg-blue-500 text-white hover:bg-blue-600 shadow-md";
+
+  const disabledStyle =
+    "bg-gray-200 text-gray-400 cursor-not-allowed";
+
   return (
     <div className="flex justify-center items-center gap-6 mt-8">
       
+      {/* Previous Button */}
       <button
+        onClick={() => {
+          if (prev) onPageChange(prev);
+        }}
         disabled={!prev}
-        onClick={() => onPageChange(prev)}
-        className={`px-5 py-2 rounded-lg font-medium transition 
-        ${
-          prev
-            ? "bg-blue-500 text-white hover:bg-blue-600 shadow-md"
-            : "bg-gray-200 text-gray-400 cursor-not-allowed"
-        }`}
+        className={`${baseBtn} ${prev ? activeStyle : disabledStyle}`}
       >
-         Prev
+        Prev
       </button>
 
+      {/* Next Button */}
       <button
+        onClick={() => {
+          if (next) onPageChange(next);
+        }}
         disabled={!next}
-        onClick={() => onPageChange(next)}
-        className={`px-5 py-2 rounded-lg font-medium transition 
-        ${
-          next
-            ? "bg-blue-500 text-white hover:bg-blue-600 shadow-md"
-            : "bg-gray-200 text-gray-400 cursor-not-allowed"
-        }`}
+        className={`${baseBtn} ${next ? activeStyle : disabledStyle}`}
       >
-        Next 
+        Next
       </button>
 
     </div>

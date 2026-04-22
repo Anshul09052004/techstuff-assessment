@@ -1,30 +1,49 @@
 import { useState } from "react";
 
-export default function Tabs({ types, movesCount, gameCount }) {
-    const [active, setActive] = useState(types[0]);
+export default function Tabs(props) {
 
-    return (
-        <div>
-            <div className="flex border-b mb-4">
-                {types.map((t) => (
-                    <button
-                        key={t}
-                        onClick={() => setActive(t)}
-                        className={`px-4 py-2 ${active === t
-                                ? "bg-gray-300 font-bold"
-                                : "bg-gray-100"
-                            }`}
-                    >
-                        {t}
-                    </button>
-                ))}
-            </div>
+  const types = props.types || [];
+  const movesCount = props.movesCount;
+  const gameCount = props.gameCount;
 
-            <div className="border p-7 mb-4">
-                <p><b>Game Indices count:</b> {gameCount}</p>
-                <p><b>Total moves count:</b> {movesCount}</p>
+  // first type ko default rakh rahe hain (agar available ho)
+  const [active, setActive] = useState(types.length ? types[0] : null);
 
-            </div>
-        </div>
-    );
+  return (
+    <div>
+
+      <div className="flex border-b mb-4">
+        {types.map((item, i) => {
+
+          const isActive = active === item;
+
+          return (
+            <button
+              key={i}
+              onClick={() => setActive(item)}
+              className={
+                "px-4 py-2 " +
+                (isActive
+                  ? "bg-gray-300 font-bold"
+                  : "bg-gray-100")
+              }
+            >
+              {item}
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="border p-7 mb-4">
+        <p>
+          <b>Game Indices count:</b> {gameCount}
+        </p>
+
+        <p>
+          <b>Total moves count:</b> {movesCount}
+        </p>
+      </div>
+
+    </div>
+  );
 }
