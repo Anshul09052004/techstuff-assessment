@@ -19,7 +19,7 @@ export default function PokemonTable({ data, onClick }) {
                     >
                         <td className="border p-2">{i + 1}</td>
 
-                        <td className="border p-2 capitalize text-blue-600">
+                        <td className="border p-2 capitalize text-black">
                             {p.name}
                         </td>
                     </tr>
